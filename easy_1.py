@@ -22,17 +22,16 @@
 
 
 class Solution(object):
-    def removeDuplicates(self, nums):
+    def twoSum(self, nums, target):
         """
         :type nums: List[int]
+        :type target: int
         :rtype: List[int]
         """
-        instanceOfNumber = {}
-        k=0
-        for number in nums:
-            if not instanceOfNumber.get(number):
-                instanceOfNumber[number] = True
-                nums[k]=number
-                k+=1
-
-        return k
+        seen = {}
+        for i in range(len(nums)):
+            temp = target - nums[i]
+            if temp in seen:
+                return [seen[temp], i]
+            else:
+                seen[nums[i]] = i
