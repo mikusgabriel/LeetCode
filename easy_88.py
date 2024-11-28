@@ -35,8 +35,27 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        for i in range (0,m+n -1):
-           if nums1[i] < nums2[i] :
-                temp = nums1[i]
-                nums1[i] = nums2[i]
-                nums2[i] = temp
+        k = 0
+        for i in range (m,m+n):
+            nums1[i] = nums2[k]
+            k = k+1
+
+        second_ptr = 0
+        first_ptr = 0
+        for i in range(0,len(nums1)):
+            if i >= len(nums1):
+                break
+            smallest = nums1[i]
+            first_ptr = i
+            second_ptr = i
+            for j in range(i+1,len(nums1)):
+                if nums1[j] < smallest:
+                    smallest =  nums1[j]
+                    second_ptr = j
+
+            temp = nums1[first_ptr]
+            nums1[first_ptr] = nums1[second_ptr]
+            nums1[second_ptr] = temp
+
+            
+
