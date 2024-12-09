@@ -66,7 +66,7 @@ summ = checkSummOfFile(result)
 
 
 def generateFileSystem_checksumTest2(line_input):
-
+    
     filesystem_checksum = []
     id_number = 0
     for i in range(len(line_input)):
