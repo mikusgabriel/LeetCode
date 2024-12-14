@@ -1,6 +1,3 @@
-from copy import deepcopy
-
-
 f = open("data.txt", "r")
 line_input = f.read().strip()
 
