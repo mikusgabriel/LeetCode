@@ -1,4 +1,6 @@
 import math
+import time
+debut_time = time.time()
 # If the stone is engraved with the number 0,
 # it is replaced by a stone engraved with the number 1.
 
@@ -11,46 +13,51 @@ import math
 f = open("data.txt", "r")
 rocks_array = list(map(int, f.read().strip().split()))
 print(rocks_array)
+
 memoSplit = {}
-memoMult = {}
-for f in range(40):
-    i = 0
-    # might fail, lets see if len changes during the loop
-    length = len(rocks_array)
-    while i < length:
-        if rocks_array[i] == 0:
-            rocks_array[i] = 1
-            i += 1
-            continue
 
-        length_number = math.floor(math.log10(rocks_array[i])) + 1
+def getResultCompute(number,f):
+    if f >= 75:
+        return 1
+    if (number,f) in memoSplit:
+            return memoSplit[(number,f)]
+    if number == 0:
+        result = getResultCompute(1,f+1)
+        memoSplit[(number,f)] = result
+        return result
+  
 
-        if length_number % 2 == 0:
-            if rocks_array[i] in memoSplit:
-                left_part = memoSplit[rocks_array[i]][0]
-                right_part = memoSplit[rocks_array[i]][1]
+    length_number = math.floor(math.log10(number)) + 1
 
-            else:
-                left_part = rocks_array[i] // 10 ** (length_number / 2)
-                right_part = rocks_array[i] % 10 ** (length_number / 2)
 
-                memoSplit[rocks_array[i]] = (left_part, right_part)
 
-            rocks_array[i] = left_part
-            rocks_array.append(right_part)
+    if length_number % 2 != 0:
+        result = getResultCompute(number*2024,f+1)
+        memoSplit[(number,f)] = result
+        return result
+    
+    left_part = number // 10 ** (length_number / 2)
+    right_part = number % 10 ** (length_number / 2)
+    
+    
 
-        else:
-            if rocks_array[i] in memoMult:
-                rocks_array[i] = memoMult[rocks_array[i]]
+    result =  getResultCompute(left_part,f+1) + getResultCompute(right_part,f+1)
+    memoSplit[(number,f)] = result
 
-            else:
-                multiplied_number = rocks_array[i] * 2024
-                memoMult[rocks_array[i]] = multiplied_number
 
-                rocks_array[i] = multiplied_number
+    return result
 
-        i += 1
+summ = 0
 
-    print(i)
+i = 0
+# might fail, lets see if len changes during the loop
+length = len(rocks_array)
+while i < length:
+    summ += getResultCompute(rocks_array[i],0)
+    
+  
+    
+    i+=1
 
-print(len(rocks_array))
+print(summ)
+print(time.time()-debut_time)
