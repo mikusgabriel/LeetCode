@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "regex": "cpp",
+        "iostream": "cpp",
+        "string": "cpp",
+        "xstring": "cpp",
+        "ostream": "cpp",
+        "unordered_map": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "xtree": "cpp"
+    }
+}

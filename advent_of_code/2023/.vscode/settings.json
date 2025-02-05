@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "string": "cpp",
+        "xstring": "cpp",
+        "regex": "cpp",
+        "xlocale": "cpp",
+        "locale": "cpp",
+        "iostream": "cpp",
+        "sstream": "cpp",
+        "ostream": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
